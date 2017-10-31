@@ -1,0 +1,24 @@
+{
+  "name": "motusposts",
+  "version": "1.0.0",
+  "description": "Applications to share stories in with a network of users",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "materializecss",
+    "javascript",
+    "post",
+    "based",
+    "social",
+    "network"
+  ],
+  "author": "Denis Junuzovic",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.12.5"
+  }
+}

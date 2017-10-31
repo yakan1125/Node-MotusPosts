@@ -1,0 +1,35 @@
+<nav class="grey darken-3">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="/posts" class="brand-logo center">Motus Posts</a>
+      <a href="#" data-activates="main-nav" class="button-collapse show-on-large"><i class="fa fa-bars"></i></a>
+      <!-- right nav -->
+      <ul class="right hide-on-small-only">
+        {{#if user}}
+          <li><a href="/dashboard">Welcome {{user.fistname}}</a></li>
+          <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+        {{else}}
+          <li><a href="/posts"><i class="fa fa-book"></i>  Public Posts</a></li>
+        {{/if}}
+      </ul>
+      <!-- side nav -->
+      <ul class="side-nav" id="main-nav">
+
+        {{#if user}}
+
+        {{else}}
+          <li>
+            <a href="/auth/google" class="btn red darken-1"><i class="fa fa-google left"></i>Login with Google</a>
+          </li>
+        {{/if}}
+        <li><a href="/posts"><i class="fa fa-book"></i> Public Posts</a></li>
+        <li class="divider"></li>
+        {{#if user}}
+        <li><a href="/dashboard"><i class="fa fa-cog"></i> Dashboard</a></li>
+        <li><a href="/posts/my"><i class="fa fa-user"></i> My Posts</a></li>
+        <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>

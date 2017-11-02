@@ -5,23 +5,25 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session')
 const passport = require('passport');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 const path = require('path');
 
 // load User model
 require('./models/User');
+// load Post model
+require('./models/Post');
 // passport config
 require('./config/passport')(passport);
 // load routes
 const auth = require('./routes/auth');
 const index = require('./routes/index');
+const posts = require('./routes/posts');
 
 // load keys
 const keys = require('./config/keys');
 
 // map global promise
 mongoose.Promise = global.Promise;
-
-
 
 // connect database via mongoose
 mongoose.connect(keys.mongoURI, {
@@ -32,6 +34,12 @@ mongoose.connect(keys.mongoURI, {
 
 // define app as express
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // public dir
 app.use(express.static(path.join(__dirname, 'public')));
@@ -64,6 +72,7 @@ app.use((req, res, next) => {
 // use routes
 app.use('/auth', auth);
 app.use('/', index);
+app.use('/posts', posts);
 // define conditional port PROD || DEV
 const port = process.env.PORT || 5000;
 

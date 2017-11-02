@@ -18,7 +18,7 @@ module.exports = (passport) => {
       const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
       const newUser = {
         googleID: profile.id,
-        fistname: profile.name.givenName,
+        firstname: profile.name.givenName,
         lastname: profile.name.familyName,
         email: profile.emails[0].value,
         image: image

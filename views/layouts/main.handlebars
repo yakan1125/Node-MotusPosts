@@ -19,14 +19,19 @@
 </head>
 <body>
   {{> _header}}
+  {{#if user}}
+  {{> _addBtn}}
+  {{/if}}
   <main>
     <div class="container">
       {{{body}}}
     </div>
   </main>
+  {{> _footer}}
   <!-- Compiled and minified JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.7.3/basic/ckeditor.js"></script>
   <script src="/js/script.js"></script>
 </body>
 </html>

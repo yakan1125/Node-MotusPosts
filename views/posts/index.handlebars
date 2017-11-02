@@ -1,0 +1,30 @@
+<h1>Posts</h1>
+<div class="row">
+  {{#each posts}}
+    <div class="col s12 m4 center ">
+      <div class="card">
+        <div class="card-image">
+          <a href="/posts/edit/{{id}}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>
+        </div>
+        <div class="card-content ">
+          <h4>{{title}}</h4>
+          {{{body}}}
+        </div>
+
+        <div class="chip mb-1">
+          <img src="{{user.image}}" alt="Profile">
+          {{user.firstname}} {{user.lastname}}
+        </div>
+
+        <div class="card-action">
+          <a href="/posts/show/{{id}}" class="btn grey"><i class="fa fa-eye"></i>  Read More</a>
+        </div>
+      </div>
+
+    </div>
+    {{else}}
+    <div class="col s12">
+      <p>No Posts at this time!</p>
+    </div>
+  {{/each}}
+</div>

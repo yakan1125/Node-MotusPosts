@@ -23,3 +23,12 @@ body {
   .mb-5{
     margin-bottom: 50px;
   }
+
+
+  .post-text{
+    min-height: 240px;
+  }
+
+  #delete-form{
+    display: inline;
+  }

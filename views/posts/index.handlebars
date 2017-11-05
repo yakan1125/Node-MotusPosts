@@ -1,19 +1,21 @@
-<h1>Posts</h1>
+<h1>Public Posts</h1>
 <div class="row">
   {{#each posts}}
     <div class="col s12 m4 center ">
       <div class="card">
         <div class="card-image">
-          <a href="/posts/edit/{{id}}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>
+          {{#if user}}
+          {{!-- get the global user id with ../ --}}
+          {{{editIcon user.id ../user.id id}}}
+          {{/if}}
         </div>
-        <div class="card-content ">
+        <div class="card-content post-text">
           <h4>{{title}}</h4>
-          {{{body}}}
+          {{stripTags (truncate body 150)}}
         </div>
-
         <div class="chip mb-1">
           <img src="{{user.image}}" alt="Profile">
-          {{user.firstname}} {{user.lastname}}
+         <a href="/posts/user/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
         </div>
 
         <div class="card-action">

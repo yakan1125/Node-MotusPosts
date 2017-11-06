@@ -25,8 +25,10 @@ router.get('/', (req, res) => {
 });
 
 // get posts  for my route
-router.get('/my', ensureAuthenticated,(req, res) => {
-  Post.find({user: req.user.id})
+router.get('/my', ensureAuthenticated, (req, res) => {
+  Post.find({
+      user: req.user.id
+    })
     .populate('user')
     .then(posts => {
       res.render('posts/index', {
@@ -38,8 +40,9 @@ router.get('/my', ensureAuthenticated,(req, res) => {
 // get posts from specific user
 router.get('/user/:userId', (req, res) => {
   Post.find({
-    user: req.params.userId, status: 'Public'
-  })
+      user: req.params.userId,
+      status: 'Public'
+    })
     .populate('user')
     .then(posts => {
       res.render('posts/index', {
@@ -48,7 +51,7 @@ router.get('/user/:userId', (req, res) => {
     });
 });
 
-router.get('/show/:id',  (req, res) => {
+router.get('/show/:id', (req, res) => {
   Post.findOne({
       _id: req.params.id
 
@@ -56,20 +59,20 @@ router.get('/show/:id',  (req, res) => {
     .populate('user')
     .populate('comments.commentUser')
     .then(post => {
-      if(post.status == 'Public'){
+      if (post.status == 'Public') {
         res.render('posts/show', {
           post: post
         });
-      }else{
-        if(req.user){
-         if(req.user.id == post.user._id){
-           res.render('posts/show', {
-             post: post
-           });
-         }else{
-           res.redirect('/posts');
-         }
-        }else{
+      } else {
+        if (req.user) {
+          if (req.user.id == post.user._id) {
+            res.render('posts/show', {
+              post: post
+            });
+          } else {
+            res.redirect('/posts');
+          }
+        } else {
           res.redirect('/posts');
         }
       }
@@ -91,7 +94,9 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
       if (post.user != req.user.id) {
         res.redirect('/posts')
       } else {
-        res.render('posts/edit', {post: post})
+        res.render('posts/edit', {
+          post: post
+        })
       }
     });
 });
@@ -100,15 +105,13 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
 // insert new post into DB
 router.post('/', ensureAuthenticated, (req, res) => {
   let allowComments = req.body.allowComments ? true : false;
-
   const newPost = {
-    title: req.body.title,
+    title: req.body.title || 'No Title Given',
     status: req.body.status,
-    body: req.body.body,
+    body: req.body.body || '<p>No Content Provided</p>',
     allowComments: allowComments,
     user: req.user.id
   }
-
   new Post(newPost)
     .save()
     .then(post => {
@@ -119,8 +122,10 @@ router.post('/', ensureAuthenticated, (req, res) => {
 
 // duplictae post
 router.post('/duplicate/:id', ensureAuthenticated, (req, res) => {
-  Post.findOne({_id: req.params.id})
-  .then(post => {
+  Post.findOne({
+      _id: req.params.id
+    })
+    .then(post => {
       const newPost = {
         title: post.title + '-Copy',
         status: post.status,
@@ -159,8 +164,8 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   }).then(post => {
     let allowComments = req.body.allowComments ? true : false;
-    post.title = req.body.title;
-    post.body = req.body.body;
+    post.title = req.body.title || 'No Title Given';
+    post.body = req.body.body || '<p>No Content Provided</p>';
     post.status = req.body.status;
     post.allowComments = allowComments;
     post.save()

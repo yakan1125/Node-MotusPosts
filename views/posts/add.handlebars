@@ -2,9 +2,12 @@
 <div class="row">
   <div class="col s12 m12">
     <form action="/posts" method="post">
+      {{#if error}}
+      <p href="#" class="error red">{{error}}</p>
+      {{/if}}
       <div class="input-field">
         <label>Title</label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
       </div>
       <div class="input-field">
         <select name="status">
@@ -26,9 +29,9 @@
       </div>
       <div class="input-field">
         <h5>Your Post Content</h5>
-        <textarea name="body" class="materialize-textarea"></textarea>
+        <textarea name="body" class="materialize-textarea validate" required></textarea>
       </div>
-    
+
       <div class="input-field">
         <input type="submit" value="Submit" class="btn teal">
       </div>

@@ -19,12 +19,11 @@
 </head>
 <body>
   {{> _header}}
-  {{#if user}}
-  {{> _addBtn}}
-  {{/if}}
+   {{#if user}} {{> _addBtn}} {{/if}}
   <main>
     <div class="container">
       {{{body}}}
+      
     </div>
   </main>
   {{> _footer}}

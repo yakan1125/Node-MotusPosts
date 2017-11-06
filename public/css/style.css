@@ -59,7 +59,21 @@ h2 {
  width: 50px;
  margin-top: 7px
 }
+.error {
+  padding: 10px;
+  color: #fff;
+  animation: blink .7s linear 1;
+  margin-bottom: 20px;
+}
 
+@keyframes blink{
+ from{
+   opacity: 0;
+ }
+ to{
+opacity: 1
+ }
+}
 @media (max-width: 480px){
     .brand-logo img {
       width: 43px;

@@ -1,32 +1,30 @@
-<h1>Public Posts</h1>
+<h1 class="page-title">Posts</h1>
 <div class="row">
   {{#each posts}}
-    <div class="col s12 m4 center ">
-      <div class="card">
-        <div class="card-image">
-          {{#if user}}
-          {{!-- get the global user id with ../ --}}
-          {{{editIcon user.id ../user.id id}}}
-          {{/if}}
-        </div>
-        <div class="card-content post-text">
-          <h4>{{title}}</h4>
-          {{stripTags (truncate body 150)}}
-        </div>
-        <div class="chip mb-1">
-          <img src="{{user.image}}" alt="Profile">
-         <a href="/posts/user/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
-        </div>
-
-        <div class="card-action">
-          <a href="/posts/show/{{id}}" class="btn grey"><i class="fa fa-eye"></i>  Read More</a>
-        </div>
+  <div class="col s12 m4 center ">
+    <div class="card">
+      <div class="card-image">
+        {{#if user}} {{!-- get the global user id with ../ --}} {{{editIcon user.id ../user.id id}}} {{/if}}
+      </div>
+      <div class="card-content post-text">
+        <h4>{{title}}</h4>
+        {{stripTags (truncate body 150)}}
+      </div>
+      <div class="chip mb-1">
+        <img src="{{user.image}}" alt="Profile">
+        <a href="/posts/user/{{user.id}}">{{user.firstname}} {{user.lastname}}</a>
       </div>
 
+      <div class="card-action">
+        <a href="/posts/show/{{id}}" class="btn grey">
+          <i class="fa fa-eye"></i> Read More</a>
+      </div>
     </div>
-    {{else}}
-    <div class="col s12">
-      <p>No Posts at this time!</p>
-    </div>
+
+  </div>
+  {{else}}
+  <div class="col s12">
+    <p>No Posts at this time!</p>
+  </div>
   {{/each}}
 </div>

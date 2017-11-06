@@ -1,5 +1,5 @@
-<h1>Welcome {{user.firstname}}</h1>
-<h4>Your Posts</h4>
+<h1 class="page-title">Dashboard</h1>
+
 {{#if posts}}
 <table class="bordered">
     <thead>
@@ -19,15 +19,22 @@
             <td>{{status}}</td>
             <td>
                 {{!-- edit btn --}}
-                <a class="btn left-align" href="/posts/edit/{{id}}">
+                <a class="btn left-align orange" href="/posts/edit/{{id}}">
                     <i class="fa fa-pencil"></i>
                 </a>
+                {{!-- clone post --}}
+                <form action="/posts/duplicate/{{id}}" method="post" id="clone-form">
+                    <button class="btn blue">
+                        <i class="fa fa-clone"></i>
+                    </button>
+                </form>
                 {{!-- delete btn --}}
                 <form action="/posts/{{id}}?_method=DELETE" method="post" id="delete-form">
                     <button class="btn red">
                         <i class="fa fa-trash"></i>
                     </button>
                 </form>
+                
             </td>
         </tr>
         {{/each}}
@@ -36,4 +43,3 @@
 {{else}}
 <p>You have not created any stories yet!</p>
 {{/if}}
-

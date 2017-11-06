@@ -72,7 +72,6 @@ router.get('/show/:id',  (req, res) => {
         }else{
           res.redirect('/posts');
         }
-
       }
     });
 });
@@ -114,6 +113,27 @@ router.post('/', ensureAuthenticated, (req, res) => {
     .save()
     .then(post => {
       res.redirect(`/posts/show/${post.id}`);
+    });
+});
+
+
+// duplictae post
+router.post('/duplicate/:id', ensureAuthenticated, (req, res) => {
+  Post.findOne({_id: req.params.id})
+  .then(post => {
+      const newPost = {
+        title: post.title + '-Copy',
+        status: post.status,
+        body: post.body,
+        allowComments: post.allowComments,
+        user: post.user,
+        date: Date.now()
+      }
+      new Post(newPost)
+        .save()
+        .then(post => {
+          res.redirect('/dashboard');
+        });
     });
 });
 

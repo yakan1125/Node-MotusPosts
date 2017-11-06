@@ -55,7 +55,14 @@ h2 {
 .navbar-wrapper{
   height: auto;
 }
-  .brand-logo img {
+.brand-logo img {
  width: 50px;
  margin-top: 7px
+}
+
+@media (max-width: 480px){
+    .brand-logo img {
+      width: 43px;
+      margin-top: 7px
+    }
 }
